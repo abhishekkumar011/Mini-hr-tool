@@ -16,12 +16,27 @@ const applyLeave = async (req, res) => {
       reason,
     });
 
-    res.status(201).json(leave);
+    res.status(201).json({
+      leave,
+      msg: "Leave applied successfully",
+    });
   } catch (error) {
+    console.error("Leave request error ", error);
     res.status(500).json({
       msg: "Leave request failed",
     });
   }
 };
 
-export { applyLeave };
+const getMyLeaves = async (req, res) => {
+  const leaves = await Leave.find({
+    employeeId: req.user?._id,
+  });
+
+  res.status(200).json({
+    leaves,
+    msg: "Leave fetched successfully",
+  });
+};
+
+export { applyLeave, getMyLeaves };
