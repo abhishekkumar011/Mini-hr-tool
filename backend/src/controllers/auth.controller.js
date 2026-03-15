@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 import { User } from "../models/user.model.js";
 
 const register = async (req, res) => {
@@ -23,12 +23,12 @@ const register = async (req, res) => {
       role,
     });
 
-    res.status(201).json({
+    return res.status(201).json({
       msg: "User registered",
     });
   } catch (error) {
     console.error("Registration Error ", error);
-    res.status(500).json({
+    return res.status(500).json({
       msg: "Registration failed",
     });
   }
@@ -73,7 +73,7 @@ const login = async (req, res) => {
     });
   } catch (error) {
     console.error("Login Error", error);
-    res.status(500).json({
+    return res.status(500).json({
       msg: "Login failed",
     });
   }
