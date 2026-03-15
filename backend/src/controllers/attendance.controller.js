@@ -23,4 +23,12 @@ const markAttendance = async (req, res) => {
   }
 };
 
-export { markAttendance };
+const getMyAttendance = async (req, res) => {
+  const records = await Attendance.find({
+    employeeId: req.user._id,
+  });
+
+  return res.status(200).json(records);
+};
+
+export { markAttendance, getMyAttendance };
